@@ -12,13 +12,16 @@ const getBorderColors = (colors = 'random') => {
 module.exports.decorateConfig = (config) => {
   var configObj = Object.assign({
     animate: false,
-    borderWidth: '4px',
+    borderTop: '4px',
+    borderRight: '4px',
+    borderBottom: '4px',
+    borderLeft: '4px',
+    borderRadius: '4px',
     borderColors: ['#fc1da7', '#fba506'],
     borderAngle: '180deg'
   }, config.hyperBorder);
 
   var colors = getBorderColors(configObj.borderColors).join(',');
-  var borderWidth = configObj.borderWidth;
   var animateStyles = `
     background-size: 800% 800%;
     animation: AnimationName 16s ease infinite;
@@ -29,7 +32,7 @@ module.exports.decorateConfig = (config) => {
         height: 100%;
         background: linear-gradient(${ configObj.animate ? '269deg' : configObj.borderAngle }, ${colors});
         ${ configObj.animate ? animateStyles : '' }
-        border-radius: ${borderWidth};
+        border-radius: ${configObj.borderRadius};
         overflow: hidden;
       }
       @keyframes AnimationName {
@@ -39,44 +42,44 @@ module.exports.decorateConfig = (config) => {
       }
       body {
         position: absolute;
-        top: ${borderWidth};
-        bottom: ${borderWidth};
-        left: ${borderWidth};
-        right: ${borderWidth};
-        border-radius: ${borderWidth};
+        top: ${configObj.borderTop};
+        bottom: ${configObj.borderBottom};
+        left: ${configObj.borderLeft};
+        right: ${configObj.borderRight};
+        border-radius: ${configObj.borderRadius};
       }
       ${config.css || ''}
       #mount {
       }
       .hyper_main {
         background-color: ${config.backgroundColor || '#000'};
-        top: ${borderWidth};
-        bottom: ${borderWidth};
-        left: ${borderWidth};
-        right: ${borderWidth};
+        top: ${configObj.borderTop};
+        bottom: ${configObj.borderBottom};
+        left: ${configObj.borderLeft};
+        right: ${configObj.borderRight};
         border-width: 0px;
       }
       .hyper_main .header_header {
-        top: ${borderWidth};
-        left: ${borderWidth};
-        right: ${borderWidth};
+        top: ${configObj.borderTop};
+        left: ${configObj.borderLeft};
+        right: ${configObj.borderRight};
       }
       .hyper_main .tabs_list {
         border-bottom-color: ${config.borderColor};
-        border-top-left-radius: ${borderWidth};
-        border-top-right-radius: ${borderWidth};
+        border-top-left-radius: ${configObj.borderRadius};
+        border-top-right-radius: ${configObj.borderRadius};
       }
       .hyper_main .tab_tab:last-child {
-        border-top-right-radius: ${borderWidth}
+        border-top-right-radius: ${configObj.borderRadius}
       }
       .hyper_main .terms_terms {
-        border-radius: 0 0 ${borderWidth} ${borderWidth};
-        bottom: ${borderWidth};
-        left: ${borderWidth};
-        right: ${borderWidth};
+        border-radius: 0 0 ${configObj.borderRadius} ${configObj.borderRadius};
+        bottom: ${configObj.borderBottom};
+        left: ${configObj.borderLeft};
+        right: ${configObj.borderRight};
       }
       .hyper_main .terms_term {
-        margin-top: ${borderWidth};
+        margin-top: ${configObj.borderTop};
       }
     `
   });
